@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Linq;
 
 namespace flizzbuzz
 {
@@ -57,6 +58,18 @@ namespace flizzbuzz
 
             }
             return sb.ToString();
+        }
+
+        public string GetSummary(string result)
+        {
+            var values = result.Split(' ');
+            var groups = values.GroupBy(c => c).Where(g => !int.TryParse(g.FirstOrDefault(), out var r));
+
+            return $"fizz: {groups.FirstOrDefault(g => g.Key == Fizz)?.Count()}\n" +
+                $"buzz: {groups.FirstOrDefault(g => g.Key == Buzz)?.Count()}\n" +
+                $"fizzbuzz: {groups.FirstOrDefault(g => g.Key == FizzBuzz)?.Count()}\n" +
+                $"lucky: {groups.FirstOrDefault(g => g.Key == Lucky)?.Count()}\n" +
+                $"integer: {values.Count() - groups.Sum(g => g.Count())}";
         }
     }
 }
