@@ -8,6 +8,7 @@ namespace flizzbuzz
         public const string Fizz = "fizz";
         public const string Buzz = "buzz";
         public const string FizzBuzz = "fizzbuzz";
+        public const string Lucky = "lucky";
 
         public string Magic_3_5_15(int from, int to)
         {
@@ -23,6 +24,13 @@ namespace flizzbuzz
             var sb = new StringBuilder();
             for (int i = 1; i <= to - from; i++)
             {
+                if (i.ToString().Contains("3"))
+                {
+                    sb.Append(Lucky);
+                    sb.Append(" ");
+                    continue;
+                }
+
                 if (i % 15 == 0)
                 {
                     sb.Append(FizzBuzz);
